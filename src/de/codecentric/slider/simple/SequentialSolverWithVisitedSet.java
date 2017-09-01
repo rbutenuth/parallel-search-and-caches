@@ -13,14 +13,13 @@ public class SequentialSolverWithVisitedSet implements Solver {
     private NodeFilter<SimpleNode> filter;
 
     public SequentialSolverWithVisitedSet(NodeFilter<SimpleNode> filter) {
-	this.filter = filter;
-    }
-    
-    @Override
-    public String toString() {
-        return "BFS, filter: " + filter; 
+        this.filter = filter;
     }
 
+    @Override
+    public String toString() {
+        return "BFS, filter: " + filter;
+    }
 
     @Override
     public Node<?> solve(SliderBoard board) {
@@ -31,7 +30,7 @@ public class SequentialSolverWithVisitedSet implements Solver {
         List<SimpleNode> front = new ArrayList<>();
         List<SimpleNode> nextFront;
         filter.accept(null, root.asLong());
-	front.add(root);
+        front.add(root);
         SimpleNode solutionNode = null;
         while (solutionNode == null) {
             nextFront = new ArrayList<>();

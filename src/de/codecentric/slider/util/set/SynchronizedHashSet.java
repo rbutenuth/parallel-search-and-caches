@@ -7,18 +7,18 @@ public class SynchronizedHashSet implements SimpleSet {
     private Set<Long> set;
 
     public SynchronizedHashSet() {
-	set = new HashSet<>(1_000_000);
+        set = new HashSet<>(1_000_000);
     }
 
     @Override
     public String toString() {
-	return "Synchronized HashSet";
+        return "Synchronized HashSet";
     }
 
     @Override
     public boolean add(Long entry) {
-	synchronized (set) {
-	    return set.add(entry);
-	}
+        synchronized (set) {
+            return set.add(entry);
+        }
     }
 }

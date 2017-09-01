@@ -14,43 +14,43 @@ public class StreamSolver implements Solver {
     private volatile SimpleNode solutionNode;
 
     public StreamSolver(NodeFilter<SimpleNode> filter) {
-	this.filter = filter;
-	solutionNode = null;
+        this.filter = filter;
+        solutionNode = null;
     }
 
     @Override
     public String toString() {
-	return "P-BFS, filter: " + filter;
+        return "P-BFS, filter: " + filter;
     }
 
     @Override
     public Node<?> solve(SliderBoard board) {
-	SimpleNode root = new SimpleNode(board);
-	List<SimpleNode> front = new ArrayList<>();
-	front.add(root);
-	if (root.isSolution()) {
-	    solutionNode = root;
-	}
-	while (solutionNode == null) {
-	    front = buildNextFront(front);
-	}
-	return solutionNode;
+        SimpleNode root = new SimpleNode(board);
+        List<SimpleNode> front = new ArrayList<>();
+        front.add(root);
+        if (root.isSolution()) {
+            solutionNode = root;
+        }
+        while (solutionNode == null) {
+            front = buildNextFront(front);
+        }
+        return solutionNode;
     }
 
     private List<SimpleNode> buildNextFront(List<SimpleNode> front) {
-	return front.parallelStream().map((node) -> {
-	    List<SimpleNode> nf = new ArrayList<>();
-	    for (SimpleNode nextNode : node.nextNodes(filter)) {
-		if (nextNode.isSolution()) {
-		    solutionNode = nextNode;
-		    break;
-		}
-		nf.add(nextNode);
-	    }
-	    return nf;
-	}).reduce((left, right) -> {
-	    left.addAll(right);
-	    return left;
-	}).get();
+        return front.parallelStream().map((node) -> {
+            List<SimpleNode> nf = new ArrayList<>();
+            for (SimpleNode nextNode : node.nextNodes(filter)) {
+                if (nextNode.isSolution()) {
+                    solutionNode = nextNode;
+                    break;
+                }
+                nf.add(nextNode);
+            }
+            return nf;
+        }).reduce((left, right) -> {
+            left.addAll(right);
+            return left;
+        }).get();
     }
 }

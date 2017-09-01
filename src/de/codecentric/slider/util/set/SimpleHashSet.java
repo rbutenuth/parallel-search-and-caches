@@ -7,16 +7,16 @@ public class SimpleHashSet implements SimpleSet {
     private Set<Long> set;
 
     public SimpleHashSet() {
-	set = new HashSet<>(1_000_000);
+        set = new HashSet<>(1_000_000);
     }
-    
+
     @Override
     public String toString() {
-	return "HashSet";
+        return "HashSet";
     }
 
     @Override
     public boolean add(Long entry) {
-	return set.add(entry);
+        return set.add(entry);
     }
 }

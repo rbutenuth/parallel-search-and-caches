@@ -10,7 +10,8 @@ public interface Node<T extends Node<?>> {
     public T getPrevious();
 
     /**
-     * @return Values of tiles packed in one long with tile 0 as lowest and tile 15 as highest bits.
+     * @return Values of tiles packed in one long with tile 0 as lowest and tile
+     *         15 as highest bits.
      */
     int valueAt(int row, int col);
 

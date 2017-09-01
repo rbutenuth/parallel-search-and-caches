@@ -8,20 +8,20 @@ public class VisitedSetFilter<T extends Node<?>> implements NodeFilter<T> {
 
     @Override
     public void markVisited(Long nodeAsLong) {
-	set.add(nodeAsLong);
+        set.add(nodeAsLong);
     }
-    
+
     public VisitedSetFilter(SimpleSet set) {
-	this.set = set;
+        this.set = set;
     }
-    
+
     @Override
     public boolean accept(T from, Long nodeAsLong) {
-	return set.add(nodeAsLong);
+        return set.add(nodeAsLong);
     }
 
     @Override
     public String toString() {
-	return "VisitedSetFilter, set: " + set;
+        return "VisitedSetFilter, set: " + set;
     }
 }

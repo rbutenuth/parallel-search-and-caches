@@ -15,36 +15,36 @@ public class AStarSolver implements Solver {
     private NodeFilter<AStarNode> filter;
 
     public AStarSolver(NodeQueue open) {
-	this.open = open;
-	filter = new VisitedSetFilter<>(new SimpleHashSet());
+        this.open = open;
+        filter = new VisitedSetFilter<>(new SimpleHashSet());
     }
 
     @Override
     public String toString() {
-	return "A*, queue: " + open;
+        return "A*, queue: " + open;
     }
 
     @Override
     public Node<?> solve(SliderBoard board) {
-	AStarNode root = new AStarNode(board);
-	if (root.isSolution()) {
-	    return root;
-	}
-	open.add(root);
-	filter.markVisited(root.asLong());
-	AStarNode solutionNode = null;
-	while (solutionNode == null) {
-	    AStarNode node = open.fetchFirst();
-	    List<AStarNode> nextNodes = node.nextNodes(filter);
-	    for (AStarNode nextNode : nextNodes) {
-		if (nextNode.isSolution()) {
-		    solutionNode = nextNode;
-		    break;
-		}
-		open.add(nextNode);
+        AStarNode root = new AStarNode(board);
+        if (root.isSolution()) {
+            return root;
+        }
+        open.add(root);
+        filter.markVisited(root.asLong());
+        AStarNode solutionNode = null;
+        while (solutionNode == null) {
+            AStarNode node = open.fetchFirst();
+            List<AStarNode> nextNodes = node.nextNodes(filter);
+            for (AStarNode nextNode : nextNodes) {
+                if (nextNode.isSolution()) {
+                    solutionNode = nextNode;
+                    break;
+                }
+                open.add(nextNode);
 
-	    }
-	}
-	return solutionNode;
+            }
+        }
+        return solutionNode;
     }
 }
